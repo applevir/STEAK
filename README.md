@@ -26,7 +26,7 @@ Here the input HTS file (BAM or SAM) is parsed for chimeric reads. Reads that pa
 
 If you wish to parse HTS PE reads and keep relevant mate-pair information the SAM or BAM must be sorted in pairs (e.g. this can usually be achieved sorting by name).  Otherwise to treat data as SE, SAM or BAM can be in any order. For example usage and execution, please see or use steak.sh
 
-Usage: steak <paired | unpaired> <sam> <cigar_ceiling> <smith_waterman_threshold> <minimal_trimmed_length> <reference_file> <bait_length>
+Usage: `steak <paired | unpaired> <sam> <cigar_ceiling> <smith_waterman_threshold> <minimal_trimmed_length> <reference_file> <bait_length>`
 
 	mode						Pass input HTS file in PE (paired) or SE (unpaired) mode
     sam         				Name of SAM file

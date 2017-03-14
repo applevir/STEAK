@@ -1,0 +1,17 @@
+#!/usr/bin/python
+
+import sys
+import os
+
+steak_directory=os.path.dirname(os.path.realpath(__file__))
+
+if len(sys.argv)==8 and sys.argv[1]=="paired":
+  prog=os.path.normpath(os.path.join(steak_directory, "steak-paired", "steak"))
+  cmd=prog+" "+sys.argv[2]+" "+sys.argv[3]+" "+sys.argv[4]+" "+sys.argv[5]+" "+sys.argv[6]+" "+sys.argv[7]
+  os.system(cmd)
+
+if len(sys.argv)==8 and sys.argv[1]=="unpaired":
+  prog=os.path.normpath(os.path.join(steak_directory, "steak-unpaired", "steak"))
+  cmd=prog+" "+sys.argv[2]+" "+sys.argv[3]+" "+sys.argv[4]+" "+sys.argv[5]+" "+sys.argv[6]+" "+sys.argv[7]
+  os.system(cmd)
+

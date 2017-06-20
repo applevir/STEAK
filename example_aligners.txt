@@ -1,8 +1,0 @@
-#Create Novoindex for host reference
-novoindex hg19reference hg19.fasta
-
-#Novoalign parameters for mapping of trimmed reads
-novoalign -d hg19reference -o SAM -f trimmed_reads.1.fastq > trimmed_read_mapping.sam
-
-#Novoalign parameters for mapping of trimmed reads and corresponding mates
-novoalign -d hg19reference -o SAM -o FullNW -f reads.1.fastq reads.2.fastq > trimmedNmates.sam

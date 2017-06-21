@@ -59,27 +59,33 @@ II. Integration Detection Module
 
 An aligner of choice can be used to map trimmed reads back to the original host. However, we do recommend a sensitive mapper (see dependencies for options). For our purposes, we have used Novoalign. This is an example of a basic mapping; you can adjust Novoalign parameters for your respective data:
 
-Create Novoindex for host reference
+Create Novoindex for host reference:
+
 `novoindex hg19reference hg19.fasta`
 
 Novoalign parameters for Trimmed Read Detection:
+
 `novoalign -d hg19reference -o SAM -f trimmed_reads.1.fastq > trimmed_read_detection.sam`
 
 Novoalign parameters for Guided Detection:
+
 `novoalign -d hg19reference -o SAM -o FullNW -f reads.1.fastq reads.2.fastq > guided_detection.sam`
 
 After the trimmed reads have been mapped to the host, for detection of reference and non-reference integrations the following commands can be used to produce the locations of candidate TE integrations.`
 
 Convert BAM to BED:
+
 `bedtools bamtobed -i mapped_detection.bam > mapped_trims.bed`
 
 Mark number of mapped reads around known integration sites (works for reference and/or non-reference). This is using a 100 bp window around an integration site:
+
 `bedtools window -w 100 -c -a list_of_known_integration_sites.bed -b mapped_trims.bed > readCount_for_integrations.bed`
 
 Search for de novo integrations:
 `bedtools window -w 2000 -v -a mapped_trims.bed -b list_of_known_integration_sites.bed | bedtools merge -c 4 -o count -d 1000 -i - > novel_integrations.bed`
 
 Filter de novo candidates with minimum threshold (e.g. "$4 >= readCount"). Here we have used a minimum of 5 reads at least 2000 bp away from known integration sites:
+
 `bedtools window -w 2000 -v -a mapped_trims.bed -b list_of_known_integration_sites.bed| bedtools merge -c 4 -o count -d 1000 -i - | awk '{if ($4 >=5) print($0);}'- > filtered_novel_ints.bed`
 
 

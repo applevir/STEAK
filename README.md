@@ -82,6 +82,7 @@ Mark number of mapped reads around known integration sites (works for reference 
 `bedtools window -w 100 -c -a list_of_known_integration_sites.bed -b mapped_trims.bed > readCount_for_integrations.bed`
 
 Search for de novo integrations:
+
 `bedtools window -w 2000 -v -a mapped_trims.bed -b list_of_known_integration_sites.bed | bedtools merge -c 4 -o count -d 1000 -i - > novel_integrations.bed`
 
 Filter de novo candidates with minimum threshold (e.g. "$4 >= readCount"). Here we have used a minimum of 5 reads at least 2000 bp away from known integration sites:
@@ -119,7 +120,7 @@ STEAK is fully parallelised for SAM and FASTQ processing with MPI. Piped BAMs an
 
 Tips & FAQ
 ================
-1. How do I make an interleaved FASTQ from paired FASTQs?
+**1. How do I make an interleaved FASTQ from paired FASTQs?**
 
 Paired FASTQ files must be merged into a single interleaved file. If your FASTQ pairs are in two separate files, you can merge them into an interleaved file with this command:
 
@@ -129,7 +130,8 @@ Alternatively, if you have a single FASTQ file with pairs but it is not collated
 
 `cat awesome_genome.unsorted.fq  | paste - - - - | sort -k1,1 -t " " | tr "\t" "\n" > awesome_genome.interleaved.fastq`
 
-2. I have BAM/SAM files that are a mix of paired-end and single-end reads. Which mode should I use?
+
+**2. I have BAM/SAM files that are a mix of paired-end and single-end reads. Which mode should I use?**
 
 If you want to use the guided detection you should separate the paired-reads from the singletons and run paired-read CRAM/BAM/SAM with the paired mode and the singletons in the unpaired mode.
 
@@ -141,7 +143,7 @@ STEAK accepts piped BAMs but for paired mode they must be collated by name. We h
 
 `bamcollate2 filename=awesome_genome.bam outputformat=sam | steak --pipe --TE-reference MOBILELEMENT.fasta --paired --aligned --output awesome_genome_mobi`
 
-4. How do I make STEAK process my SAM/FASTQ in a parallel fashion?
+**4. How do I make STEAK process my SAM/FASTQ in a parallel fashion?**
 
 Make sure you have MPI first, then for example to run with 200 cores:
 

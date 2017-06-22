@@ -15,6 +15,7 @@ Trimmed reads can be processed with an aligner of choice - we recommend a sensit
 Compilation
 -------------
 `cd STEAK/`
+
 `make`
 
 If it does not compile, make sure you indeed have boost-libraries and MPI.
@@ -137,11 +138,11 @@ If you want to use the guided detection you should separate the paired-reads fro
 
 Otherwise, you can also run your CRAM/BAM/SAM in the unpaired mode and output only trimmed reads without corresponding mate information.
 
-3. I would like to use the guided detection but I have a huge BAM file and I cannot be bothered to name sort or name sort + decompress. What should I do?
+**3. I would like to use the guided detection but I have a huge BAM file and I cannot be bothered to name sort or name sort + decompress. What should I do?**
 
 STEAK accepts piped BAMs but for paired mode they must be collated by name. We have found biobambam2's bamcollate2 very useful in that you can pipe collated reads to STEAK. An example of this would be:
 
-`bamcollate2 filename=awesome_genome.bam outputformat=sam | steak --pipe --TE-reference MOBILELEMENT.fasta --paired --aligned --output awesome_genome_mobi`
+`bamcollate2 filename=awesome_genome.messy.bam outputformat=sam | steak --pipe --TE-reference MOBILELEMENT.fasta --paired --aligned --output awesome_genome_mobi`
 
 **4. How do I make STEAK process my SAM/FASTQ in a parallel fashion?**
 

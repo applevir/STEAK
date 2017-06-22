@@ -155,6 +155,7 @@ Note: mpirun is **only** for SAMs and FASTQs. Compressed files (BAM/CRAM) can on
 If you wish to handle the BAM/CRAM in a multithread fashion you can do the following:
 
 `export $OMP_NUM_THREADS=4`
+
 `bamcollate2 filename=awesome_genome.bam outputformat=sam | steak --pipe --TE-reference MOBILELEMENT.fasta --paired --aligned --output awesome_genome_mobi`
 
 

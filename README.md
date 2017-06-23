@@ -146,7 +146,7 @@ STEAK accepts piped BAMs but for paired mode they must be collated by name. We h
 
 **4. How do I make STEAK process my SAM/FASTQ in a parallel fashion?**
 
-Make sure you have MPI first, then for example to run with 200 cores:
+Make sure you have MPI first. Then, for example, if you were to run with 200 cores:
 
 `mpirun -n 200 steak --input ALL_DA_GENOMES.sam --TE-reference MOBILELEMENT.fasta --paired --aligned`
 
@@ -160,7 +160,7 @@ If you wish to handle the BAM/CRAM in a multithread fashion you can do the follo
 
 **5. Where can I get TE annotations for my genome of interest?**
 
-If you're HTS data corresponds to the genome of a well annotated species, then you can find reference TE annotations on RepeatMasker(http://www.repeatmasker.org/genomicDatasets/RMGenomicDatasets.html). The *.fa.out(.gz) files for each build are tabular files with the respective TE information (chromosome, position, strand, name, etc).
+If your HTS data corresponds to the genome of a well annotated species, then you can find reference TE annotations on RepeatMasker(http://www.repeatmasker.org/genomicDatasets/RMGenomicDatasets.html). The *.fa.out(.gz) files for each build are tabular files with the respective TE information (chromosome, position, strand, name, etc).
 
 If you want to search for known non-reference integrations, it's best to trust the respective literature for your TE of interest.
 

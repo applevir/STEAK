@@ -158,6 +158,13 @@ If you wish to handle the BAM/CRAM in a multithread fashion you can do the follo
 
 `bamcollate2 filename=awesome_genome.bam outputformat=sam | steak --pipe --TE-reference MOBILELEMENT.fasta --paired --aligned --output awesome_genome_mobi`
 
+**5. Where can I get TE annotations for my genome of interest?**
+
+If you're HTS data corresponds to the genome of a well annotated species, then you can find reference TE annotations on RepeatMasker(http://www.repeatmasker.org/genomicDatasets/RMGenomicDatasets.html). The *.fa.out(.gz) files for each build are tabular files with the respective TE information (chromosome, position, strand, name, etc).
+
+If you want to search for known non-reference integrations, it's best to trust the respective literature for your TE of interest.
+
+
 
 Questions or help
 -----------------

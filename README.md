@@ -6,7 +6,7 @@ STEAK is a tool designed to validate and discover transposable element (TE) and 
 
 Dependencies
 -------------
-STEAK relies on boost-libraries [http://www.boost.org], MPI [https://www.open-mpi.org/software/ompi/v2.1/], gcc (4.9.2 or higher),MPI, bedtools2 [https://github.com/arq5x/bedtools2/], python (2.7.x), and various common unix tools such as sort and awk. 
+STEAK relies on boost-libraries [http://www.boost.org], MPI [https://www.open-mpi.org/software/ompi/v2.1/], gcc (4.9.2 or higher), bedtools2 [https://github.com/arq5x/bedtools2/], python (2.7.x), and various common unix tools such as sort and awk. 
 
 SAMtools [http://www.htslib.org] or biobambam2 [https://github.com/gt1/biobambam2/releases] can be used to decompress while collating (paired reads together) BAM files.
 

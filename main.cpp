@@ -366,37 +366,15 @@ int main(int argc, char** argv){
       fastq_file sf(input);
       Read read1, read2;
       std::vector<Read> reads;
-      if(sf.get_first_read(read1)){
-	sf.get_read(read2);
-	if(read1.name.substr(0, read1.name.rfind("/"))!=read2.name.substr(0, read2.name.rfind("/"))){
-	  read1=read2;
-	  sf.get_read(read2);
-	}
-	reads.clear();
+      sf.get_start_position();
+      sf.get_pair_beginning();
+      while(sf.get_read(read1) && sf.get_read(read2, true)){
+	
 	if(read1.name.substr(0, read1.name.rfind("/"))!=read2.name.substr(0, read2.name.rfind("/"))){
 	  std::cout << "Paired-ends files must be sorted by name.\n";
 	  return -1;
 	}
-	reads.push_back(read1);
-	reads.push_back(read2);
-	if(process_reads_paired(alignment_quality, match_quality, transposon_length, host_length, TE_references, reads, fastq1, fastq2, fastq_te, read_info)>=0){
-	  fastq1_txt=fastq1_txt+fastq1;
-	  fastq2_txt=fastq2_txt+fastq2;
-	  fastq_te_txt= fastq_te_txt+fastq_te;
-	  read_info_txt=read_info_txt+read_info;
-	}
-      }
-      while(sf.get_read(read1)){
-	sf.get_read(read2);
-	if(read1.name.substr(0, read1.name.rfind("/"))!=read2.name.substr(0, read2.name.rfind("/"))){
-	  read1=read2;
-	  sf.get_read(read2);
-	}
 	reads.clear();
-	if(read1.name.substr(0, read1.name.rfind("/"))!=read2.name.substr(0, read2.name.rfind("/"))){
-	  std::cout << "Paired-ends files must be sorted by name.\n";
-	  return -1;
-	}
 	reads.push_back(read1);
 	reads.push_back(read2);
 	if(process_reads_paired(alignment_quality, match_quality, transposon_length, host_length, TE_references, reads, fastq1, fastq2, fastq_te, read_info)>=0){
@@ -419,17 +397,8 @@ int main(int argc, char** argv){
       fastq_file sf(input);
       Read read1;
       std::vector<Read> reads;
-      if(parallel_environment::get_process_num()>0){
-	if(sf.get_first_read(read1)){
-	  reads.clear();
-	  reads.push_back(read1);
-	  if(process_reads_unpaired(alignment_quality, match_quality, transposon_length, host_length, TE_references, reads, fastq1, fastq_te, read_info)>=0){
-	    fastq1_txt=fastq1_txt+fastq1;
-	    fastq_te_txt= fastq_te_txt+fastq_te;
-	    read_info_txt=read_info_txt+read_info;
-	  }
-	}
-      }
+      sf.get_start_position();
+      sf.get_pair_beginning();
       while(sf.get_read(read1)){
 	reads.clear();
 	reads.push_back(read1);

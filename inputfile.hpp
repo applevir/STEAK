@@ -28,8 +28,9 @@ class fastq_file{
     public:
       fastq_file(const std::string& filename);
       ~fastq_file();
-      bool get_first_read(Read& read);
-      bool get_read(Read& read);
+      bool get_start_position(bool recursive=true);
+      bool get_pair_beginning();
+      bool get_read(Read& read, bool second_read=false);
 };
 
 class sam_file{

@@ -3,7 +3,7 @@
 #include <math.h>
 #include <boost/algorithm/string.hpp>
 #include <iostream>
-
+#include "data.hpp"
 
 class file_exception: public std::exception{
   virtual const char* what() const throw(){
@@ -97,76 +97,78 @@ fastq_file::fastq_file(const std::string& filename){
   in.seekg(local_beginning);
   local_position=local_beginning;
   std::string line;
-  if(parallel_environment::get_process_num()>0){
-    do{
-      if(!std::getline(in, line)){
-          return;
-      }
-    }while(line!="+");
-    std::getline(in, line);
-  }
 }
 
 fastq_file::~fastq_file(){
   in.close();
 }
 
-bool fastq_file::get_first_read(Read& read){
-  std::vector<std::string> lines;
-  std::string line;
-  if(!std::getline(in, line)){
-    return false;
-  }
-  do{
-    if(!std::getline(in, line)){
-      return false;
+bool fastq_file::get_start_position(bool recursive){
+  if(parallel_environment::get_process_num()>0){
+    std::string line;
+    std::vector<unsigned long long> positions;
+    std::vector<std::string> lines;
+    do{
+      positions.push_back(in.tellg());
+      if(!std::getline(in, line)){
+        return false;
+      }
+    }while(line!="+");
+    if(positions.size()>3){
+      in.seekg(positions[positions.size()-3]);   
+    }else{
+        if(recursive){
+          get_start_position(false);
+        }
     }
-    lines.push_back(line);
-  }while(line!="+");
-  if(!std::getline(in, line)){
-    return false;
   }
-  lines.push_back(line);
-  if(lines.size()<=3){
-      return false;
-  }
-  std::string name, sequence, quality;
-  name=lines[lines.size()-4];
-  sequence=lines[lines.size()-3];
-  quality=lines.back();
-  read.set(name, sequence, quality);
   return true;
 }
 
+bool fastq_file::get_pair_beginning(){
+    unsigned long long pos1, pos2;
+    Read read1, read2;
+    pos1=in.tellg();
+    if(!get_read(read1)){
+      return false;
+    }
+    pos2=in.tellg();
+    if(!get_read(read2)){
+      return false;
+    }
+    if(read1.name.substr(0, read1.name.rfind("/"))==read2.name.substr(0, read2.name.rfind("/"))){
+	  in.seekg(pos1);
+	}else{
+      in.seekg(pos2);  
+    }
+    return true;
+}
 
-bool fastq_file::get_read(Read& read){
-  if(local_position>=local_end){
+
+bool fastq_file::get_read(Read& read, bool second_read){
+  if(local_position>=local_end+1 &!second_read){
 	  return false;
   }
-  int i_line=0 /*=-1*/;
+  int i_line=0;
   std::string name, sequence, quality, line;
   while(std::getline(in, line)){
-//	if(line.substr(0, 1)=="@"){
-//	  i_line=0;
-//	}
 	switch(i_line){
 	    case 0:
 	      	name=line.substr(1);
 	      	break;
 	    case 1:
 	    	sequence=line;
-	    	break;
+           	break;
 	    case 3:
 	    	quality=line;
 	    	read.set(name, sequence, quality);
 	    	local_position=in.tellg();
-	    	return true;
+           	return true;
 	    default:
 	    	break;
 	    }
 		++i_line;
 	}
-    
 	return false;
   }
 

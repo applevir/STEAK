@@ -164,6 +164,7 @@ If your HTS data corresponds to the genome of a well annotated species, then you
 
 If you want to search for known non-reference integrations, it's best to trust the respective literature for your TE of interest.
 
+For an updated database of human retrotransposons see dbRIP: http://dbrip.brocku.ca
 
 
 Questions or help

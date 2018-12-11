@@ -18,7 +18,7 @@ Compilation
 
 `make`
 
-If it does not compile, make sure you indeed have boost-libraries and MPI.
+If it does not compile, make sure you indeed have boost-libraries and MPI. Moreover, make sure to be consistent in the compiler used for MPI and when you compile STEAK.
 
 Using STEAK
 ================

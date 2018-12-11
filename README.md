@@ -36,7 +36,7 @@ Reads that partially match the TE or retrovirus reference are trimmed of the mat
 
 Parameters can be adjusted to fine-tune chimeric read detection. 
 
-If you have HTS files that are paired-end, the paired reads must be collated if you wish to retain respective mate information (this is useful for guided detection). For a SAM/BAM file that means its must be **sorted by name or collated in pairs so that a read** is followed by its mate. Paired end FASTQs (e.g. `reads_1.fq & reads_2.fq`) must be in a single interleaved file. 
+If you have HTS files that are paired-end, the paired reads must be collated if you wish to retain respective mate information (this is useful for guided detection). For a SAM/BAM file that means its must be **sorted by name or collated in pairs** so that a read is followed by its mate. Paired end FASTQs (e.g. `reads_1.fq & reads_2.fq`) must be in a single interleaved file. 
 
 Otherwise to treat data in an unpaired fashion, or as singletons, your reads can can be in any order.
 

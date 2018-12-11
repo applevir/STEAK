@@ -26,15 +26,19 @@ I. Detecting Chimeric Reads
 ---------------------------
 Here the input HTS file is parsed for chimeric reads. 
 
-TE and retrovirus references should be in FASTA format. STEAK accepts FASTQ, SAM, and piped BAM/CRAM as HTS inputs. 
+TE and retrovirus references should be in FASTA format. At this time, STEAK accepts only **one TE sequence per FASTA**. 
+
+Please make sure to check that your TE and retrovirus sequences are in **upper case**. STEAK does not accept lower case FASTA sequences which are meant for genome masking.
+
+STEAK accepts FASTQ, SAM, and piped BAM/CRAM as HTS inputs. 
 
 Reads that partially match the TE or retrovirus reference are trimmed of the match portion. The host flank and TE are output into respective FASTQs. 
 
 Parameters can be adjusted to fine-tune chimeric read detection. 
 
-If you have HTS files that are paired-end, the paired reads must be collated if you wish to retain respective mate information (this is useful for guided detection). For a SAM/BAM file that means its must be sorted so that a read is followed by its mate. Paired end FASTQs (e.g. `reads_1.fq & reads_2.fq`) must be in a single interleaved file. 
+If you have HTS files that are paired-end, the paired reads must be collated if you wish to retain respective mate information (this is useful for guided detection). For a SAM/BAM file that means its must be **sorted by name or collated in pairs so that a read** is followed by its mate. Paired end FASTQs (e.g. `reads_1.fq & reads_2.fq`) must be in a single interleaved file. 
 
-Otherwise to treat data in an unpaired fashion, your reads can can be in any order.
+Otherwise to treat data in an unpaired fashion, or as singletons, your reads can can be in any order.
 
 Usage: `steak options [default values]:`
          
@@ -144,6 +148,8 @@ STEAK accepts piped BAMs but for paired mode they must be collated by name. We h
 
 `bamcollate2 filename=awesome_genome.messy.bam outputformat=sam | steak --pipe --TE-reference MOBILELEMENT.fasta --paired --aligned --output awesome_genome_mobi`
 
+However, we do encourage you make sure that your reads are truly collated in pairs to avoid errors from STEAK.
+
 **4. How do I make STEAK process my SAM/FASTQ in a parallel fashion?**
 
 Make sure you have MPI first. Then, for example, if you were to run with 200 cores:
@@ -165,7 +171,6 @@ If your HTS data corresponds to the genome of a well annotated species, then you
 If you want to search for known non-reference integrations, it's best to trust the respective literature for your TE of interest.
 
 For an updated database of human retrotransposons see dbRIP: http://dbrip.brocku.ca
-
 
 Questions or help
 -----------------

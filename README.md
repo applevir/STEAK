@@ -80,7 +80,7 @@ After the trimmed reads have been mapped to the host, for detection of reference
 
 Convert BAM to BED:
 
-`bedtools bamtobed -i mapped_detection.bam > mapped_trims.bed`
+`bedtools bamtobed -i  trimmed_read_detection.bam > mapped_trims.bed`
 
 Mark number of mapped reads around known integration sites (works for reference and/or non-reference). This is using a 100 bp window around an integration site:
 

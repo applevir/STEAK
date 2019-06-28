@@ -177,7 +177,6 @@ For an updated database of human retrotransposons see dbRIP: http://dbrip.brocku
 The name of the read being processed can be displayed. This allows the easy identification of the read that causes a crash but can create a large amount of data. This can be achieved by recompling STEAK to enable its debug mode and subsequently running it normally. For clarity, it is best to use this feature with a single process and a single thread.
 
 `make clean`
-
 `make debug`
 
 Questions or help

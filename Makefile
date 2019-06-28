@@ -3,6 +3,8 @@ CFLAGS=-std=c++11 -fopenmp -O3
 LFLAGS=-lboost_program_options -lboost_thread -lboost_system -fopenmp -O3
 
 all: steak
+debug: CFLAGS += -D"DEBUG"
+debug: all
 
 steak: parallelenvironment.o inputfile.o outputfile.o process.o samdata.o data.o smithwaterman.o ssw.o ssw_cpp.o main.o
 	${CC} parallelenvironment.o inputfile.o outputfile.o process.o samdata.o data.o smithwaterman.o ssw.o ssw_cpp.o main.o -o steak ${LFLAGS}

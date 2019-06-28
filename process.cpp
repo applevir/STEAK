@@ -47,6 +47,9 @@ int process_reads_paired(const double& alignment_quality,
 
   for(i_ref=0; i_ref<TE_references.size(); ++i_ref){
     for(i_read=0; i_read<reads.size(); ++i_read){
+#ifdef DEBUG
+      std::cout << reads[i_read].name << "\n";
+#endif
       smithwaterman(TE_references[i_ref].sequence, reads[i_read].sequence, results[pair_t(i_ref, i_read)].swr);
       if(results[pair_t(i_ref, i_read)].swr.relativeScore>=match_quality){
         getTrimmedValues(results[pair_t(i_ref, i_read)].swr, reads[i_read], TE_references[i_ref].direction, results[pair_t(i_ref, i_read)].trimmedRead, results[pair_t(i_ref, i_read)].trimmedPhred, results[pair_t(i_ref, i_read)].trimmedPosition, results[pair_t(i_ref, i_read)].matchRead, results[pair_t(i_ref, i_read)].matchPhred);
@@ -172,6 +175,9 @@ int process_reads_unpaired(const double& alignment_quality,
 
   for(i_ref=0; i_ref<TE_references.size(); ++i_ref){
     for(i_read=0; i_read<reads.size(); ++i_read){
+#ifdef DEBUG
+      std::cout << reads[i_read].name << "\n";
+#endif
       smithwaterman(TE_references[i_ref].sequence, reads[i_read].sequence, results[pair_t(i_ref, i_read)].swr);
       if(results[pair_t(i_ref, i_read)].swr.relativeScore>=match_quality){
 	getTrimmedValues(results[pair_t(i_ref, i_read)].swr, reads[i_read], TE_references[i_ref].direction, results[pair_t(i_ref, i_read)].trimmedRead, results[pair_t(i_ref, i_read)].trimmedPhred, results[pair_t(i_ref, i_read)].trimmedPosition, results[pair_t(i_ref, i_read)].matchRead, results[pair_t(i_ref, i_read)].matchPhred);

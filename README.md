@@ -172,6 +172,14 @@ If you want to search for known non-reference integrations, it's best to trust t
 
 For an updated database of human retrotransposons see dbRIP: http://dbrip.brocku.ca
 
+**6. How can I find which read causes a problem?
+
+The name of the read being processed can be displayed. This allows the easy identification of the read that causes a crash but can create a large amount of data. This can be achieved by recompling STEAK to enable its debug mode and subsequently running it normally. For clarity, it is best to use this feature with a single process and a single thread.
+
+`make clean`
+
+`make debug`
+
 Questions or help
 -----------------
 For questions or support contact Cindy Santander (cindy.santander@zoo.ox.ac.uk) or Philippe Gambron (philippe.gambron@stfc.ac.uk)

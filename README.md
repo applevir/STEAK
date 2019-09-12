@@ -183,3 +183,10 @@ The name of the read being processed can be displayed. This allows the easy iden
 Questions or help
 -----------------
 For questions or support contact Cindy Santander (cindy.santander@zoo.ox.ac.uk) or Philippe Gambron (philippe.gambron@stfc.ac.uk)
+
+
+ 
+Copyright (C) 2015 Cindy Santander, Philippe Gambron
+Software distributed under the GNU General Public License version 3 
+(see file GPLv3.txt or https://www.gnu.org/licenses/gpl-3.0.html)
+

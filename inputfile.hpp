@@ -1,3 +1,8 @@
+// STEAK   Specific Transposable Element Aligner (HERV-K) 
+// Copyright (C) 2015 Cindy Santander, Philippe Gambron
+// Distributed under the GNU General Public License version 3 (GPLv3.txt or https://www.gnu.org/licenses/gpl-3.0.html)
+
+
 #ifndef INPUTFILE_HPP
 #define INPUTFILE_HPP
 
